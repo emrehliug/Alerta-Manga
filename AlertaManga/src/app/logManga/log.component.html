@@ -1,0 +1,102 @@
+<div class="container" *ngIf="statusLimparLog == false">
+  <br>
+  <div class="row" style="margin-bottom: 0.5rem;">
+    <div class="col">
+    <button class="btn btn-outline-danger" (click)="deleteLogs(); novo(template)">
+      <i class="fa fa-plus-circle"></i>&nbsp;
+      Limpar Logs
+    </button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col" style="float: left; margin: 0 auto; text-align: center;">
+      <h2>LOG BOT</h2>
+      <table class="table table-dark">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">EXECUÇÃO</th>
+            <th scope="col">MENSAGEM</th>
+            <th scope="col">DATA EXECUÇÃO</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let log of logsBot| paginate: { id: 'foo',
+          itemsPerPage: numberPaginations,
+          currentPage: p,
+          totalItems: logsBot?.length }"
+          class="{{log.execucao == 'Sucesso' ? 'table-success' : 'table-danger'}}">
+
+            <th scope="row">{{log.id}}</th>
+            <td>{{log.execucao}}</td>
+            <td style="text-align: center;">{{log.mensagem}}</td>
+            <td>{{log.dataExecucao}}</td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <td colspan="8" class="text-center" *ngIf="logsBot?.length == 0">
+            <h5>Não há Mangas Cadastrados.</h5>
+          </td>
+          <tr *ngIf="logsBot.length > 10">
+            <td colspan="8" class="text-center">
+              <pagination-controls  id="foo"
+                (pageChange)="p = $event"
+                previousLabel="Previous"
+                nextLabel="Next">
+              </pagination-controls>
+            </td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+    <div class="col" style="float: left; margin: 0 auto; text-align: center;">
+      <h2>LOG API</h2>
+      <table class="table table-dark">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">EXECUÇÃO</th>
+            <th scope="col">MENSAGEM</th>
+            <th scope="col">DATA EXECUÇÃO</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let log of logsApi| paginate: { id: 'fooApi',
+          itemsPerPage: numberPaginationsApi,
+          currentPage: pApi,
+          totalItems: logsApi?.length }"
+          class="{{log.execucao == 'Sucesso' ? 'table-success' : 'table-danger'}}">
+            <th scope="row">{{log.id}}</th>
+            <td>{{log.execucao}}</td>
+            <td style="text-align: center;">{{log.mensagem}}</td>
+            <td>{{log.dataExecucao}}</td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <td colspan="8" class="text-center" *ngIf="logsApi?.length == 0">
+            <h5>Não há Mangas Cadastrados.</h5>
+          </td>
+          <tr *ngIf="logsApi.length > 10">
+            <td colspan="8" class="text-center">
+              <pagination-controls  id="fooApi"
+                (pageChange)="pApi = $event"
+                previousLabel="Previous"
+                nextLabel="Next">
+              </pagination-controls>
+            </td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!--Modal de loading-->
+<div bsModal #template="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="dialog-sizes-name1">
+  <div class="container gif">
+      <div class="item">
+        <img src="./assets/goku-vs-frieza-fight.gif">
+        <h1>Loading...</h1>
+      </div>
+  </div>
+</div>

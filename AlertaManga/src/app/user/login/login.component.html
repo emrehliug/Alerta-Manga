@@ -1,0 +1,59 @@
+<section class="vh-100" style="background-color: #000000;">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col col-xl-10">
+        <div class="card" style="border-radius: 1rem;">
+          <div class="row g-0">
+            <div class="col-md-6 col-lg-5 d-none d-md-block">
+              <img src="./assets/my-hero-academia-izuku-midoriya.jpg"
+                alt="login form" class="img-fluid" style="border-radius: 1rem 0 0 1rem; height:650px" />
+            </div>
+            <div class="col-md-6 col-lg-7 d-flex align-items-center">
+              <div class="card-body p-4 p-lg-5 text-black">
+
+                <form class="form-signin" #loginForm="ngForm" (ngSubmit)="login()">
+
+                  <div class="d-flex align-items-center mb-3 pb-1">
+                    <i class="fa-sharp fa-solid fa-book fa-2x me-3" style="color: #000000;"></i>
+                    <span class="h1 fw-bold mb-0">Alerta Manga</span>
+
+                  </div>
+                  <div>
+                    <span class="h3 fw-bold mb-0"> いらっしゃい！</span>
+                  </div>
+                  <br>
+                  <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Entre com sua conta</h5>
+
+                  <div class="form-outline mb-4">
+                    <input type="text" id="username" class="form-control" placeholder="Usuário"
+                      name="username" required [(ngModel)]="model.username">
+                  </div>
+
+                  <div class="form-outline mb-4">
+                    <input type="password" id="password" class="form-control" placeholder="Senha"
+                      name="password" required [(ngModel)]="model.password">
+                  </div>
+                  <div class="checkbox mb-3">
+                    <label>
+                      <input type="checkbox" value="remember-me"> Manter-se conectado
+                    </label>
+                  </div>
+                  <div class="pt-1 mb-4">
+                    <button [disabled]="!loginForm.valid" class="btn btn-dark btn-lg btn-block" type="submit" style="width: 100%;">Entrar</button>
+                  </div>
+
+                  <a class="small text-muted" href="#!">Esqueceu sua senha?</a>
+                  <p class="mb-5 pb-lg-2" style="color: #393f81;">Não tem uma conta? <a href="/user/registration"
+                      style="color: #393f81;">Cadastre-se aqui</a></p>
+                  <a href="#!" class="small text-muted">Termos de utilização -</a>
+                  <a href="#!" class="small text-muted"> politica de privacidade</a>
+                </form>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

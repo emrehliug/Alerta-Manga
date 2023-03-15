@@ -1,0 +1,132 @@
+<div class="container">
+  <h1 style="text-align: center;">LISTA DE MANGAS</h1>
+  
+  <HR>
+
+    <div class="row" style="margin-bottom: 0.5rem;">
+      <div class="col">
+      <button class="btn btn-outline-success" (click)="novo(template)">
+        <i class="fa fa-plus-circle"></i>&nbsp;
+        Adicionar
+      </button>
+      </div>
+    </div> 
+
+  <table class="table table-dark">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">NOME</th>
+        <th scope="col">CAPITULOS</th>
+        <th scope="col">NOTIFICAÇÃO</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let manga of mangas| paginate: { id: 'foo',
+      itemsPerPage: numberPaginations,
+      currentPage: p,
+      totalItems: mangas?.length }">
+        <th scope="row">{{manga.mangaId}}</th>
+        <td>{{manga.nome}}</td>
+        <td style="text-align: center;">{{manga.totaldeCapitulos}}</td>
+        <td>
+          <div class="form-check form-switch" >
+            <input *ngIf="!verificarMangaNotificacao(manga.nome)" class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" style="float: left; margin: 0 auto;" (change)="updateMangaNotificacao(0, manga)">
+            <input *ngIf="verificarMangaNotificacao(manga.nome)" class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" style="float: left; margin: 0 auto;" (change)="updateMangaNotificacao(1, manga)" checked>
+            <label class="form-check-label" for="flexSwitchCheckChecked"></label>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+    <tfoot>
+      <td colspan="8" class="text-center" *ngIf="mangas?.length == 0">
+        <h5>Não há Mangas Cadastrados.</h5>
+      </td>
+      <tr *ngIf="mangas.length > 10">
+        <td colspan="8" class="text-center">
+          <pagination-controls  id="foo"
+            (pageChange)="p = $event"
+            previousLabel="Previous"
+            nextLabel="Next">
+          </pagination-controls>
+        </td>
+      </tr>
+    </tfoot>
+  </table>
+</div>
+<div bsModal #template="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="dialog-sizes-name1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 id="dialog-sizes-name1" class="modal-title pull-left">
+          {{modoSalvar == "put" ? "Alterar": "Cadastrar"}} Manga
+        </h4>
+        <button type="button" class="close pull-right" (click)="template.hide()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form *ngIf="registerForm" [formGroup]="registerForm">
+          <div class="row">
+            <div class="form-group col-md-6">
+              <label>Nome</label>
+              <input type="text" class="form-control is-invalid"
+                [ngClass]="{'is-invalid': registerForm.get('nome')?.errors
+                && registerForm.get('nome')?.touched}"
+                formControlName="nome" placeholder="Insira o Nome do Manga">
+              <div *ngIf="registerForm?.get('nome')?.hasError('required')
+                && registerForm?.get('nome')?.touched" class="invalid-feedback">
+                Nome é obrigatório.
+              </div>
+            </div>
+            <div class="form-group col-md-6">
+              <label>Total de Capitulos</label>
+              <input type="number" class="form-control is-invalid"
+                [ngClass]="{'is-invalid': registerForm.get('totaldeCapitulos')?.errors
+                && registerForm.get('totaldeCapitulos')?.touched}"
+                formControlName="totaldeCapitulos" placeholder="Insira o Total de Capitulos">
+              <div *ngIf="registerForm?.get('totaldeCapitulos')?.hasError('required')
+                && registerForm?.get('totaldeCapitulos')?.touched" class="invalid-feedback">
+                Total de Capitulos é obrigatório.
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer d-flex">
+        <button class="btn btn-secondary" (click)="template.hide()">
+          Fechar
+        </button>
+        <button class="btn btn-primary ml-auto" [disabled]="!registerForm?.valid" (click)="salvar(template)">
+          Salvar {{modoSalvar == "put" ? "Alterações" : ""}}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div bsModal #confirm="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="dialog-sizes-name1">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title pull-left">
+            Deletando Usuario
+          </h4>
+          <button type="button" class="close pull-right" (click)="confirm.hide()" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>{{bodyDeletar}}</p>
+        </div>
+        <div class="modal-footer btn-group d-flex">
+          <button type="button" class="btn btn-outline-primary" (click)="confirm.hide()">
+            CENCELAR
+          </button>
+          <button type="button" class="btn btn-outline-danger" (click)="excluir(confirm)">
+            DELETAR
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>

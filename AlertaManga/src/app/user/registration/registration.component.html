@@ -1,0 +1,113 @@
+
+
+<section class="vh-100" style="background-color: #000000;">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col col-xl-10">
+        <div class="card" style="border-radius: 1rem;">
+          <div class="row g-0">
+            <div class="col-md-6 col-lg-5 d-none d-md-block">
+              <img src="./assets/Clare calymore.jpg"
+                alt="login form" class="img-fluid" style="border-radius: 1rem 0 0 1rem; height:650px" />
+            </div>
+            <div class="col-md-6 col-lg-7 d-flex align-items-center">
+              <div class="card-body p-4 p-lg-5 text-black">
+
+                <form class="form-signin" [formGroup]="registerForm">
+                  <div class="d-flex align-items-center mb-3 pb-1">
+                    <i class="fa-edit fa-solid fa-book fa-2x me-3" style="color: #000000;"></i>
+                    <span class="h1 fw-bold mb-0">Cadastro de Usuário</span>
+                  </div>
+                  <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Registre-se</h5>
+
+                  <div class="form-outline mb-4">
+                    <div class="form-group required">
+                      <input type="text" class="form-control" formControlName="fullName"
+                      [ngClass]="{'is-invalid': registerForm.get('fullName')?.errors &&
+                                                registerForm.get('fullName')?.touched }"
+                        placeholder="Nome Completo"/>
+                      <div *ngIf="registerForm.get('fullName')?.hasError('required') &&
+                                  registerForm.get('fullName')?.touched"
+                        class="invalid-feedback">
+                        Nome Completo é obrigatório.
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="form-outline mb-4">
+                    <div class="form-group">
+                      <input class="form-control" type="text" formControlName="email"
+                        [ngClass]="{ 'is-invalid': registerForm.get('email')?.errors &&
+                                                   registerForm.get('email')?.touched}"
+                        placeholder="Insira o seu E-mail"/>
+                      <div *ngIf="registerForm.get('email')?.hasError('required') &&
+                                  registerForm.get('email')?.touched"
+                        class="invalid-feedback">
+                        email é obrigatório.
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-outline mb-4">
+                    <div class="form-group">
+                      <input class="form-control" type="text" formControlName="userName"
+                        [ngClass]="{'is-invalid': registerForm.get('userName')?.errors &&
+                                                  registerForm.get('userName')?.touched}"
+                        placeholder="Nome de Usuário"/>
+                      <div *ngIf="registerForm.get('userName')?.hasError('required') &&
+                                  registerForm.get('userName')?.touched"
+                        class="invalid-feedback">
+                        Usuário é obrigatório.
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-outline mb-4">
+                    <div formGroupName="passwords">
+                      <div class="form-group">
+                        <input class="form-control" type="password" formControlName="password"
+                          [ngClass]="{ 'is-invalid': registerForm.get('passwords.password')?.errors &&
+                                                     registerForm.get('passwords.password')?.touched}"
+                          placeholder="Senha" />
+                          <div *ngIf="registerForm.get('passwords.password')?.hasError('minlength')"
+                          class="invalid-feedback">
+                          Deve conter no mínimo 4 caracters
+                        </div>
+                        <div *ngIf="registerForm.get('passwords.password')?.hasError('required') &&
+                                    registerForm.get('passwords.password')?.touched"
+                          class="invalid-feedback">
+                          Senha é obrigatório.
+                        </div>
+                      </div>
+                      <br>
+                      <div class="form-group">
+                        <input class="form-control" type="password" formControlName="confirmPassword"
+                          [ngClass]="{ 'is-invalid': registerForm.get('passwords.confirmPassword')?.errors
+                                       && registerForm.get('passwords.confirmPassword')?.touched
+                                       ||registerForm.get('passwords.confirmPassword')?.hasError('mismatch')
+                                       && registerForm.get('passwords.confirmPassword')?.touched }"
+                          placeholder="Confirme a Senha" />
+                        <div *ngIf="registerForm.get('passwords.confirmPassword')?.hasError('required') &&
+                                    registerForm.get('passwords.confirmPassword')?.touched"
+                          class="invalid-feedback">
+                          Confirme a Senha é obrigatório
+                        </div>
+                        <div *ngIf="registerForm.get('passwords.confirmPassword')?.hasError('mismatch')
+                                    && registerForm.get('passwords.confirmPassword')?.touched"
+                          class="invalid-feedback">
+                          Confirmação não confere!
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="pt-1 mb-4">
+                    <button [disabled]="!registerForm.valid" class="btn btn-dark btn-lg btn-block" (click)="cadastrarUsuario()" style="width: 100%;">Registrar</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+

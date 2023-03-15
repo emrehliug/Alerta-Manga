@@ -1,0 +1,42 @@
+<nav class="navbar navbar-expand-xl navbar-light bg-light" *ngIf="showMenu()">
+	<a href="home" class="navbar-brand"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzjN3WV1fsTIUSWlX5ZpGo9e9JSGFT4AWUYK8WOaOpYsMYgtffI_eb12g688PW6RUKmOw&usqp=CAU" class="avatar" alt="Logo"></a>
+	<button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+		<span class="navbar-toggler-icon"></span>
+	</button>
+	<!-- Collection of nav links, forms, and other content for toggling -->
+	<div id="navbarCollapse" class="collapse navbar-collapse justify-content-start">
+		<div class="navbar-nav">
+			<a  class="nav-item nav-link" [routerLink]="['/home']" routerLinkActive="active" style="cursor: pointer;"><i class="fa fa-home fa-fw" aria-hidden="true"></i>&nbsp;Home</a>
+			<div class="nav-item dropdown" dropdown>
+				<a class="nav-link" [routerLink]="['/mangas']" style="cursor: pointer;"><i class="fa fa-book fa-fw" aria-hidden="true"></i>&nbsp;Mangas</a>
+			</div>
+			<div class="nav-item dropdown" dropdown *ngIf="permissaoSuperAdmin()">
+				<a class="nav-link" [routerLink]="['/logs']" style="cursor: pointer;"><i class="fa fa-bug" aria-hidden="true"></i>&nbsp;Logs</a>
+			</div>
+		</div>
+	</div>
+	<div class="navbar-nav ml-auto">
+		<a class="nav-item nav-link notifications" routerLinkActive="active"><i class="fa fa-bell-o" aria-hidden="true"></i><span class="badge">1</span></a>
+		<a class="nav-item nav-link messages" routerLinkActive="active"><i class="fa fa-envelope-o"></i><span class="badge">10</span></a>
+		<div class="nav-item dropdown" dropdown>
+			<a dropdownToggle data-bs-toggle="dropdown" aria-expanded="false" class="nav-link dropdown-toggle user-action">
+				<span class="icon"  onMouseOver="this.style.cursor='pointer'" tooltip="Avatar">
+					<svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="black" class="bi bi-person-circle" viewBox="0 0 16 16">
+						<path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+						<path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+					  </svg>
+				</span>
+				 {{userName()}} 
+				 <b class="caret"></b>
+			</a>
+			<div class="dropdown-menu">
+				<a href="#" class="dropdown-item"><i class="fa fa-user-o"></i> Perfil</a>
+				<a href="#" class="dropdown-item"><i class="fa fa-sliders"></i> Configurações</a>
+				<div class="dropdown-divider"></div>
+				<a class="dropdown-item" (click)="logout()" style="cursor: pointer;"><i class="fa fa-sign-out" aria-hidden="true"></i> 
+					Sair
+				</a>
+			</div>
+		</div>
+	</div>
+</nav>
