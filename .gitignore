@@ -350,3 +350,4 @@ MigrationBackup/
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
 /Backend/AlertaMangaBotApi/MangaBotApi.Application/appsettings.json
+/Backend/AlertaMangaBotApi/MangaBotApi.Application/appsettings.Development.json
